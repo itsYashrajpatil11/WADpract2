@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User List</title>
+    <link rel="stylesheet" href="liststyle.css">
+</head>
+<body>
+
+<h2>Registered Users</h2>
+
+<table border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Dept</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>College Name</th>
+             <th>Address</th>
+        </tr>
+    </thead>
+    <tbody id="userTable"></tbody>
+</table>
+
+<br>
+<button onclick="clearData()">Clear All Data</button>
+<br><br>
+<a href="register.html">Back to Registration</a>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    let table = document.getElementById("userTable");
+
+    if (users.length === 0) {
+        let row = table.insertRow();
+        let cell = row.insertCell(0);
+        cell.colSpan = 4;
+        cell.innerText = "No users registered yet!";
+    } else {
+        users.forEach(function(user) {
+            let row = table.insertRow();
+            row.insertCell(0).innerText = user.name;
+            row.insertCell(1).innerText = user.dept;
+            row.insertCell(2).innerText = user.email;
+            row.insertCell(3).innerText = user.mobile;
+            row.insertCell(4).innerText = user.college_Name;
+            row.insertCell(5).innerText = user.address;
+        });
+    }
+
+});
+
+// Clear LocalStorage function
+function clearData() {
+    localStorage.removeItem("users");
+    alert("All data cleared!");
+    location.reload();
+}
+</script>
+
+</body>
+</html>

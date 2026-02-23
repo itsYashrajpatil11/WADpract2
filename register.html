@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration</title>
+    <link rel="stylesheet" href="registerstyle.css">
+</head>
+<body>
+
+<h2>User Registration</h2>
+
+<form id="regForm">
+    Name: <input type="text" id="name" required><br><br>
+    Dept: <input type="text" id="dept" required><br><br>
+    Email: <input type="email" id="email" required><br><br>
+    Mobile: <input type="text" id="mobile" required><br><br>
+    College Name: <input type="text" id="college_Name" required><br><br>
+    Address: <input type="text" id="address" required><br><br>
+
+
+    <button type="submit">Register</button>
+</form>
+
+<script>
+document.getElementById("regForm").addEventListener("submit", function(e) {
+    e.preventDefault();   // Stop page refresh
+
+    let user = {
+        name: document.getElementById("name").value,
+        dept: document.getElementById("dept").value,
+        email: document.getElementById("email").value,
+        mobile: document.getElementById("mobile").value,
+        college_Name: document.getElementById("college_Name").value,
+        address: document.getElementById("address").value
+    };
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    users.push(user);
+    localStorage.setItem("users", JSON.stringify(users));
+
+    alert("Registration Successful!");
+    window.location.href = "list.html";
+});
+</script>
+
+</body>
+</html>
